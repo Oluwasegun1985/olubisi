@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oluwasegun John Olubisi</title>
+<meta name="description" content="Oluwasegun John Olubisi — soil scientist and PhD candidate at the University of Florida researching soil amendments, cover crops, carbon and nutrient cycling in Florida's sandy soils.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a soil profile. A layered band runs down the left edge on wide screens; each section is a horizon, from surface (About) to bedrock (Contact). */
+:root{
+  --bg:#f5f6f2;
+  --surface:#ffffff;
+  --ink:#1c2620;
+  --muted:#5a665e;
+  --line:#dde2da;
+  --accent:#2c6a4c;      /* cover-crop green */
+  --accent-2:#a8742c;    /* sand / biochar ochre */
+  --h-o:#2b2118; --h-a:#4a3826; --h-e:#c9b48a; --h-b:#a8742c; --h-c:#d9cba8; --h-r:#8a8f88;
+  --display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body:"Literata", Georgia, "Times New Roman", serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111613; --surface:#18201b; --ink:#e6ebe7; --muted:#9daaa1; --line:#2a352e;
+    --accent:#7cc4a0; --accent-2:#d6a35a;
+    --h-o:#0b0907; --h-a:#3b2c1e; --h-e:#8f7f5f; --h-b:#a8742c; --h-c:#a69a7d; --h-r:#5d635c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111613; --surface:#18201b; --ink:#e6ebe7; --muted:#9daaa1; --line:#2a352e;
+  --accent:#7cc4a0; --accent-2:#d6a35a;
+  --h-o:#0b0907; --h-a:#3b2c1e; --h-e:#8f7f5f; --h-b:#a8742c; --h-c:#a69a7d; --h-r:#5d635c;
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+
+/* Top bar */
+.topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.nav{display:flex;gap:4px 18px;flex-wrap:wrap;font-family:var(--display);font-size:14.5px}
+.nav a{color:var(--muted);text-decoration:none}
+.nav a:hover{color:var(--accent)}
+
+/* Shell with the soil profile band */
+.shell{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:28px 1fr;gap:40px}
+.profile{position:sticky;top:64px;height:calc(100vh - 96px);margin-top:32px;display:flex;flex-direction:column;border-radius:4px;overflow:hidden}
+.profile a{display:block;position:relative;flex:1}
+.profile a span{position:absolute;left:36px;top:50%;transform:translateY(-50%);font-family:var(--display);font-size:12px;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .15s}
+.profile a:hover span,.profile a:focus-visible span{opacity:1}
+.profile .o{background:var(--h-o);flex:.5}.profile .a{background:var(--h-a);flex:1.1}.profile .e{background:var(--h-e);flex:.9}
+.profile .b{background:var(--h-b);flex:1.3}.profile .c{background:var(--h-c);flex:1.2}.profile .r{background:var(--h-r);flex:.6}
+@media (max-width:820px){.shell{grid-template-columns:1fr;gap:0}.profile{display:none}}
+
+main{min-width:0;padding-bottom:64px}
+section{padding:56px 0 8px;scroll-margin-top:64px}
+.horizon{font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.horizon b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--accent-2);font-size:12px;letter-spacing:0}
+h2{font-size:clamp(26px,3.4vw,34px);font-weight:700;letter-spacing:-.015em;margin-bottom:20px}
+h3{font-size:19px;font-weight:700}
+p{margin:0 0 14px;max-width:66ch}
+.muted{color:var(--muted)}
+
+/* Hero */
+.hero{padding:56px 0 24px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.mono{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:44px;color:#fff;letter-spacing:-.02em;
+  background:linear-gradient(180deg,var(--h-a) 0 30%,var(--h-b) 30% 62%,var(--h-e) 62% 100%);box-shadow:inset 0 0 0 4px var(--bg),0 0 0 1.5px var(--line)}
+.mono span{text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.hero h1{font-size:clamp(34px,5.4vw,56px);letter-spacing:-.025em;font-weight:700}
+.hero .role{font-family:var(--display);font-size:17px;color:var(--accent);margin:10px 0 14px;font-weight:500}
+.hero .lede{font-size:18.5px;max-width:58ch}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-family:var(--display);font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;background:var(--surface)}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip.primary:hover{color:var(--bg);filter:brightness(1.08)}
+@media (max-width:600px){.hero{grid-template-columns:1fr;gap:20px}.mono{width:96px;height:96px;font-size:32px}}
+
+/* Facts strip */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:28px}
+.facts div{background:var(--surface);padding:16px 18px}
+.facts dt{font-family:var(--display);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.facts dd{margin:4px 0 0;font-size:15.5px;line-height:1.45}
+
+/* Research cards */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px}
+.card h3{margin-bottom:8px}
+.card p{font-size:15.5px;margin:0}
+.diss{margin-top:22px;border-left:4px solid var(--accent-2);background:var(--surface);border-radius:0 8px 8px 0;padding:20px 22px}
+.diss .label{font-family:var(--display);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.diss h3{font-size:21px;margin:6px 0 10px;font-style:normal}
+.diss ul{margin:0;padding-left:20px;font-size:15.5px}
+.diss li{margin:3px 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tag{font-family:var(--display);font-size:12.5px;padding:3px 9px;border-radius:4px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
+
+/* Timeline */
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 26px 24px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.timeline .when{font-family:var(--display);font-size:13.5px;color:var(--accent-2);font-variant-numeric:tabular-nums;font-weight:500}
+.timeline h3{font-size:18px;margin:2px 0}
+.timeline .where{color:var(--muted);font-size:15px;margin-bottom:6px}
+.timeline p{font-size:15.5px;margin:0}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+
+/* Publications */
+.pubs{list-style:none;margin:0;padding:0;counter-reset:pub}
+.pubs li{counter-increment:pub;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:18px 0;border-top:1px solid var(--line)}
+.pubs li:last-child{border-bottom:1px solid var(--line)}
+.pubs li::before{content:counter(pub,decimal-leading-zero);font-family:var(--display);font-weight:700;color:var(--accent-2);font-size:20px;font-variant-numeric:tabular-nums}
+.pubs .title{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.35;display:block;margin-bottom:4px}
+.pubs .meta{font-size:15px;color:var(--muted)}
+.pubs .meta em{color:var(--ink)}
+.pubs .doi{font-family:var(--display);font-size:13.5px;margin-top:6px;display:inline-block}
+.me{font-weight:600;color:var(--ink)}
+
+.list{list-style:none;margin:0;padding:0}
+.list li{padding:12px 0;border-top:1px solid var(--line);font-size:15.5px}
+.list li:last-child{border-bottom:1px solid var(--line)}
+.list .yr{font-family:var(--display);font-size:13px;color:var(--accent-2);font-variant-numeric:tabular-nums;display:block;font-weight:500}
+.list strong{font-weight:600}
+
+/* Media */
+.media{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.media a{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px}
+.media a:hover{border-color:var(--accent)}
+.media .src{font-family:var(--display);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.media .t{font-family:var(--display);font-weight:700;font-size:16.5px;line-height:1.3;margin:6px 0}
+.media .d{font-size:14.5px;color:var(--muted)}
+
+/* Awards table */
+.awards{width:100%;border-collapse:collapse;font-size:15.5px}
+.awards-wrap{overflow-x:auto}
+.awards th{text-align:left;font-family:var(--display);font-weight:500;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:0 12px 10px 0;border-bottom:1px solid var(--line)}
+.awards td{padding:12px 12px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.awards td:first-child{font-family:var(--display);color:var(--accent-2);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
+.awards td:nth-child(2){font-weight:600}
+
+.skills{display:flex;flex-wrap:wrap;gap:8px}
+.skills span{font-family:var(--display);font-size:14px;padding:6px 12px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+
+/* Contact */
+.contact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px;display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
+@media (max-width:760px){.contact{grid-template-columns:1fr}}
+.contact dl{margin:0;display:grid;gap:12px}
+.contact dt{font-family:var(--display);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.contact dd{margin:2px 0 0}
+.copy{font-family:var(--display);font-size:12.5px;margin-left:8px;padding:2px 8px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.copy:hover{color:var(--accent);border-color:var(--accent)}
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.profiles a{font-family:var(--display);font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--ink);display:flex;justify-content:space-between;gap:8px}
+.profiles a::after{content:"↗";color:var(--muted)}
+.profiles a:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-family:var(--display);font-size:13.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#about">Oluwasegun J. Olubisi</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#publications">Publications</a>
+      <a href="#media">Media</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="profile" aria-label="Soil profile navigation">
+    <a class="o" href="#about"><span>O · About</span></a>
+    <a class="a" href="#research"><span>A · Research</span></a>
+    <a class="e" href="#experience"><span>E · Experience</span></a>
+    <a class="b" href="#publications"><span>B · Publications &amp; media</span></a>
+    <a class="c" href="#awards"><span>C · Awards &amp; service</span></a>
+    <a class="r" href="#contact"><span>R · Contact</span></a>
+  </nav>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about" class="hero" aria-labelledby="name">
+      <div class="mono" aria-hidden="true"><span>OJO</span></div>
+      <div>
+        <h1 id="name">Oluwasegun John Olubisi</h1>
+        <div class="role">Soil Scientist · Researcher · Instructor</div>
+        <p class="lede">I study how soil amendments and cover crops can build carbon, hold nutrients and keep crops productive on Florida's sandy soils, so growers have practical alternatives to heavy synthetic fertilizer use.</p>
+        <div class="links">
+          <a class="chip primary" href="#contact">Get in touch</a>
+          <a class="chip" href="https://scholar.google.com/citations?user=UMlkbdAAAAAJ&amp;hl=en">Google Scholar</a>
+          <a class="chip" href="https://www.researchgate.net/profile/Olubisi-John">ResearchGate</a>
+          <a class="chip" href="http://www.linkedin.com/in/oluwasegun-olubisi-a17359118">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Biography" style="padding-top:8px">
+      <div class="horizon"><b>O</b> Surface · About</div>
+      <p>I am a PhD candidate in Interdisciplinary Ecology (Soil and Water Science) in the University of Florida's School of Natural Resources and Environment, and a Water Scholars Graduate Fellow in the UF Water Institute's BREWS program. I am based at the UF/IFAS Gulf Coast Research and Education Center (GCREC) in Wimauma, Florida, working with Dr. Mary G. Lusk.</p>
+      <p>My research covers integrated soil management to increase soil carbon sequestration, reduce nutrient losses and boost crop productivity. I work with biochar, composted biosolids, organic manure and cover crops, and on the beneficial reuse of reclaimed water for irrigation. Before Florida, I trained in soil chemistry and fertility at Obafemi Awolowo University in Nigeria and the Federal University of Rio Grande do Sul in Brazil.</p>
+      <dl class="facts">
+        <div><dt>Currently</dt><dd>PhD Candidate, University of Florida (expected Aug 2028)</dd></div>
+        <div><dt>Based at</dt><dd>UF/IFAS GCREC, Wimauma, FL</dd></div>
+        <div><dt>Fellowship</dt><dd>UF Water Institute BREWS Water Scholar</dd></div>
+        <div><dt>Languages</dt><dd>English, Yoruba</dd></div>
+      </dl>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research" aria-labelledby="h-research">
+      <div class="horizon"><b>A</b> Topsoil · Research</div>
+      <h2 id="h-research">Bridging environmental sustainability and agricultural productivity</h2>
+      <div class="grid3">
+        <div class="card">
+          <h3>Sustainable soil management</h3>
+          <p>Practices that improve soil health, raise soil carbon sequestration and manage nutrient cycling to cut losses and improve crop nutrient use.</p>
+        </div>
+        <div class="card">
+          <h3>Integrated practices</h3>
+          <p>How biochar, biosolids, organic manure and cover cropping, alone and together, change soil quality and crop performance.</p>
+        </div>
+        <div class="card">
+          <h3>Water resource management</h3>
+          <p>Beneficial reuse of reclaimed water for agricultural irrigation, and limiting nutrient leaching from sandy soils.</p>
+        </div>
+      </div>
+
+      <div class="diss">
+        <div class="label">Dissertation</div>
+        <h3>Integrated Impacts of Soil Amendments and Cover Crops on Sandy Soil Health, Carbon, and Nutrients</h3>
+        <ul>
+          <li>Split-plot randomized complete block field trial at GCREC: 36 plots, with bell pepper as the test crop.</li>
+          <li>Treatments combine biochar and composted biosolids with sunn hemp and sorghum-sudangrass cover crops.</li>
+          <li>Measures greenhouse gas fluxes (CO₂, CH₄, N₂O) with a LI-COR Smart Chamber, nitrate, ammonium and phosphate leaching at 50 cm with lysimeters, soil enzyme activity and crop yield.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Biochar</span><span class="tag">Composted biosolids</span><span class="tag">Cover crops</span><span class="tag">GHG fluxes</span><span class="tag">Nutrient leaching</span><span class="tag">Soil enzymes</span><span class="tag">Entisols / Florida sands</span>
+        </div>
+        <p class="muted" style="margin:14px 0 0;font-size:14.5px">Committee: Dr. Mary G. Lusk (chair), Dr. Davie M. Kadyampakeni (co-chair), Dr. Johan Desaeger, Dr. Andrew R. Zimmerman.</p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" aria-labelledby="h-exp">
+      <div class="horizon"><b>E</b> Eluvial · Experience &amp; education</div>
+      <h2 id="h-exp">Experience and education</h2>
+      <div class="two">
+        <div>
+          <ol class="timeline">
+            <li><div class="when">2024 – present</div><h3>Graduate Research Assistant &amp; Water Scholars Graduate Fellow</h3><div class="where">Gulf Coast Research and Education Center, University of Florida, Wimauma, FL</div><p>Multi-season field experiments, experimental design, environmental sampling and data analysis.</p></li>
+            <li><div class="when">2023 – present</div><h3>Research Fellow</h3><div class="where">Institute of Agricultural Research &amp; Training (IAR&amp;T), Nigeria</div><p>Analytical lab and fieldwork, soil and water sampling, pollution index analysis for streams and rivers, environmental quality control and technical writing.</p></li>
+            <li><div class="when">2022</div><h3>Drone Pilot and Engagement Officer</h3><div class="where">Segton Consulting, Nigeria</div><p>Agribusiness consulting, precision agriculture, aerial survey data collection and biomass density measurement.</p></li>
+            <li><div class="when">2019</div><h3>Research Trainee</h3><div class="where">Institute of Chemistry &amp; Dept. of Soil Science, Federal University of Rio Grande do Sul, Porto Alegre, Brazil</div><p>Greenhouse and incubation studies of urea-biochar N release in ryegrass, humic substance fractionation, FTIR and NMR analysis.</p></li>
+            <li><div class="when">2016</div><h3>Graduate Research Assistant</h3><div class="where">Dept. of Soil Science and Land Resources Management, OAU, Ile-Ife</div><p>Field layout and mapping, crop growth and disease evaluation, total N research on maize, analysis in SAS and SPSS.</p></li>
+          </ol>
+        </div>
+        <div>
+          <ol class="timeline">
+            <li><div class="when">2023 – 2028 (expected)</div><h3>Ph.D., Interdisciplinary Ecology (Soil and Water Science)</h3><div class="where">University of Florida, School of Natural Resources and Environment</div><p>Qualifying exam passed, 2026.</p></li>
+            <li><div class="when">2021</div><h3>M.S., Soil Science and Land Resources Management</h3><div class="where">Obafemi Awolowo University, Ile-Ife, Nigeria</div><p><i>Thesis:</i> Urea intercalated biochar nitrogen release rate in soil; the agronomic efficiency and effects on humified organic matter. Research conducted partly at UFRGS, Brazil.</p></li>
+            <li><div class="when">2015</div><h3>B.Agric. (Hons.), Soil Science and Land Resources Management</h3><div class="where">Obafemi Awolowo University, Ile-Ife, Nigeria</div><p><i>Thesis:</i> Effects of urea intercalated biochar fertilizer on growth parameters of maize (<i>Zea mays</i>).</p></li>
+          </ol>
+          <h3 style="margin:8px 0 12px">Skills</h3>
+          <div class="skills">
+            <span>Field trial design (RCBD, split-plot)</span><span>GHG flux measurement (LI-COR)</span><span>R (mixed models, emmeans)</span><span>SAS · SPSS</span><span>Kjeldahl analysis</span><span>Humic substance fractionation</span><span>FTIR · NMR</span><span>Drone piloting &amp; precision ag</span><span>Scientific writing &amp; editing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" aria-labelledby="h-pubs">
+      <div class="horizon"><b>B</b> Subsoil · Publications</div>
+      <h2 id="h-pubs">Publications</h2>
+      <ol class="pubs">
+        <li><div>
+          <a class="title" href="https://abjournals.org/ajensr/wp-content/uploads/sites/15/journal/published_paper/volume-8/issue-1/AJENSR_FUIJZF9Z.pdf">Fourier transform infrared spectroscopy analysis of urea intercalated biochar</a>
+          <div class="meta"><span class="me">Olubisi, O. J.</span>, Adesanwo, O. O., Fagbenro, A. J., Azeez, M. O., &amp; Akinwale, T. (2025). <em>African Journal of Environment and Natural Science Research</em>, 8(1), 258–264.</div>
+          <a class="doi" href="https://doi.org/10.52589/AJENSR-FUIJZF9Z">doi:10.52589/AJENSR-FUIJZF9Z</a>
+        </div></li>
+        <li><div>
+          <a class="title" href="https://hal.science/hal-05126030/">Antifungal activities of non-volatile compounds of <i>Trichoderma harzianum</i> and <i>Trichoderma longibrachiatum</i> against rot fungi associated with <i>Ananas comosus</i> Linn. (pineapple)</a>
+          <div class="meta">Bolatito et al. (2024). <em>Asian Journal of Research in Botany</em>, 7(1), 94–101. Article no. AJRIB.115592.</div>
+        </div></li>
+        <li><div>
+          <a class="title" href="https://ccsenet.org/journal/index.php/jsd/article/view/0/48632">Impact of urea-intercalated-biochar on N-release in soil and humified soil organic matter</a>
+          <div class="meta"><span class="me">Olubisi, O. J.</span>, et al. (2023). <em>Journal of Sustainable Development</em>, 16(3), 79. Canadian Center of Science and Education.</div>
+          <a class="doi" href="https://doi.org/10.5539/jsd.v16n3p79">doi:10.5539/jsd.v16n3p79</a>
+        </div></li>
+      </ol>
+      <p class="muted" style="margin-top:14px;font-size:15px">Under review: a review on integrated soil management in sandy soils (<i>Soil Systems</i>, MDPI) and a paper on organic amendments and cover crops in sandy soils (<i>Discover Agriculture</i>). Full list on <a href="https://scholar.google.com/citations?user=UMlkbdAAAAAJ&amp;hl=en">Google Scholar</a>.</p>
+
+      <div class="two" style="margin-top:36px">
+        <div>
+          <h3 style="margin-bottom:12px">Selected presentations</h3>
+          <ul class="list">
+            <li><span class="yr">Nov 2026</span><strong>UF Water Institute Showcase</strong>, oral talk</li>
+            <li><span class="yr">Nov 2026</span><strong>Future of Farming Poster Competition</strong>, The Fertilizer Show, Tampa, FL</li>
+            <li><span class="yr">Nov 2026</span><strong>GHG Fluxes Under Integrated Soil Management in Florida Sands.</strong> CANVAS 2026 (ASA-CSSA-SSSA), Portland, OR, on-demand oral</li>
+            <li><span class="yr">Jun 2026</span><strong>Enzyme-Mediated Nutrient Dynamics in Cover Crop Systems.</strong> 23rd World Congress of Soil Science, Nanjing, China, oral</li>
+            <li><span class="yr">Nov 2025</span><strong>CANVAS 2025</strong>, Salt Lake City, UT, poster and oral on cover crops and soil enzyme activity</li>
+            <li><span class="yr">2025</span><strong>UF/IFAS SNRE Research Symposium</strong>, poster (Best PhD Poster)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin-bottom:12px">Outreach writing</h3>
+          <ul class="list">
+            <li><span class="yr">SSSA · Soils 4 Teachers</span><a href="https://www.soils4teachers.org/node/151"><strong>Urban Soils: The Hidden Foundation of City Life</strong></a>, an explainer on anthropogenic soils for K-12 educators</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA -->
+    <section id="media" aria-labelledby="h-media">
+      <div class="horizon"><b>B</b> Subsoil · In the media</div>
+      <h2 id="h-media">In the media</h2>
+      <div class="media">
+        <a href="https://baynews9.com/fl/tampa/news/2026/06/27/uf-student-studies-alternatives-to-synthetic-fertilizers">
+          <div class="src">Bay News 9 · Spectrum News · Jun 2026</div>
+          <div class="t">UF student studies alternatives to synthetic fertilizers</div>
+          <div class="d">TV feature on the biochar and composted biosolids field trial in Wimauma.</div>
+        </a>
+        <a href="https://blogs.ifas.ufl.edu/gcrec/2025/11/20/canvas-2025/">
+          <div class="src">UF/IFAS GCREC · Nov 2025</div>
+          <div class="t">Graduate students earn national recognition at CANVAS 2025</div>
+          <div class="d">Coverage of my CANVAS 2025 presentation on cover crops and soil enzymes.</div>
+        </a>
+        <a href="https://youtu.be/48kGoIWKUzk">
+          <div class="src">YouTube · Nov 2025</div>
+          <div class="t">UF/IFAS GCREC centennial</div>
+          <div class="d">GCREC's 100-year celebration at the Florida Ag Expo.</div>
+        </a>
+        <a href="https://youtu.be/3Frp85A9O4M">
+          <div class="src">YouTube</div>
+          <div class="t">Up in the Air and Down in the Water</div>
+          <div class="d">Featured video.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section id="awards" aria-labelledby="h-awards">
+      <div class="horizon"><b>C</b> Parent material · Awards &amp; service</div>
+      <h2 id="h-awards">Awards and honors</h2>
+      <div class="awards-wrap">
+        <table class="awards">
+          <thead><tr><th scope="col">Year</th><th scope="col">Award</th><th scope="col">Awarded by</th></tr></thead>
+          <tbody>
+            <tr><td>2026–27</td><td>Doris Lowe and Earl and Verna Lowe Scholarship</td><td>UF College of Agricultural and Life Sciences</td></tr>
+            <tr><td>2025</td><td>DEI Student Award, finalist</td><td>CANVAS (ASA-CSSA-SSSA)</td></tr>
+            <tr><td>2025</td><td>Graduate Student Leadership Conference, selected participant</td><td>CANVAS (ASA-CSSA-SSSA)</td></tr>
+            <tr><td>2025</td><td>Best Poster Presentation, PhD Student</td><td>UF/IFAS SNRE Research Symposium</td></tr>
+            <tr><td>2025</td><td>GCREC Travel Award, 2nd place</td><td>UF/IFAS GCREC</td></tr>
+            <tr><td>2024</td><td>Water Scholars Graduate Fellowship (BREWS)</td><td>UF Water Institute</td></tr>
+            <tr><td>2019</td><td>Research Traineeship Award Grant (TRA 2019-8), $5,400</td><td>International Humic Substances Society</td></tr>
+            <tr><td>2011–12</td><td>Mentorship Award</td><td>NATSA, Federal College of Agriculture, Moor Plantation, Ibadan</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin:32px 0 12px">Professional memberships</h3>
+      <ul class="list">
+        <li><span class="yr">2025 – present</span>Soil Science Society of America (SSSA) and American Society of Agronomy (ASA), graduate student member</li>
+        <li><span class="yr">2016 – present</span>British Ecological Society</li>
+        <li><span class="yr">2015 – present</span>International Humic Substances Society · Biochar Initiative of Nigeria</li>
+        <li><span class="yr">2011 – present</span>Soil Science Society of Nigeria</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="h-contact">
+      <div class="horizon"><b>R</b> Bedrock · Contact</div>
+      <h2 id="h-contact">Speaking requests and enquiries</h2>
+      <div class="contact">
+        <dl>
+          <div><dt>University email</dt><dd><a href="mailto:oj.olubisi@ufl.edu">oj.olubisi@ufl.edu</a><button class="copy" type="button" data-copy="oj.olubisi@ufl.edu" id="copy-ufl">Copy</button></dd></div>
+          <div><dt>Personal email</dt><dd><a href="mailto:oluwasegun557@gmail.com">oluwasegun557@gmail.com</a><button class="copy" type="button" data-copy="oluwasegun557@gmail.com" id="copy-gmail">Copy</button></dd></div>
+          <div><dt>Mobile</dt><dd><a href="tel:+16565651213">+1 656 565 1213</a></dd></div>
+          <div><dt>Address</dt><dd>UF/IFAS Gulf Coast Research and Education Center<br>14625 County Road 672, Wimauma, FL 33598</dd></div>
+        </dl>
+        <div class="profiles">
+          <a href="https://scholar.google.com/citations?user=UMlkbdAAAAAJ&amp;hl=en">Google Scholar</a>
+          <a href="https://www.researchgate.net/profile/Olubisi-John">ResearchGate</a>
+          <a href="http://www.linkedin.com/in/oluwasegun-olubisi-a17359118">LinkedIn</a>
+          <a href="https://www.youtube.com/@Olubisi">YouTube</a>
+          <a href="https://www.instagram.com/olubisioluwasegun/">Instagram</a>
+          <a href="https://www.facebook.com/olubisi.o.john/">Facebook</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>© 2026 Oluwasegun John Olubisi · Soil, Water &amp; Environmental Science · University of Florida</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var text = btn.getAttribute('data-copy');
+    var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1500); };
+    try {
+      navigator.clipboard.writeText(text).then(done, function(){ btn.textContent = 'Select & copy'; });
+    } catch (e) { btn.textContent = 'Select & copy'; }
+  });
+});
+</script>
+</body>
+</html>
